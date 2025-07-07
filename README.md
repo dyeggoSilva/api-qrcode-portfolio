@@ -13,7 +13,6 @@ Este projeto é uma aplicação simples que permite gerar QR Codes a partir de t
 * ZXing (para geração de QR Codes)
 * Swagger OpenAPI 3 (Springdoc)
 * Docker
-* HTML + JavaScript
 
 ---
 
