@@ -24,6 +24,23 @@ public class QrCodeController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+    @GetMapping(value = "/download", produces = MediaType.IMAGE_PNG_VALUE)
+    public ResponseEntity<byte[]> baixarQrCode(@RequestParam String texto) {
+        try {
+            byte[] imagem = qrCodeService.gerarQrCode(texto, 300, 300);
 
-    
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_PNG);
+            headers.setContentDisposition(
+                    ContentDisposition.builder("attachment")
+                            .filename("qr-code.png")
+                            .build()
+            );
+
+            return new ResponseEntity<>(imagem, headers, HttpStatus.OK);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
 }
